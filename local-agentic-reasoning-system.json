@@ -1,0 +1,122 @@
+{
+  "name": "Local Agentic RAG System - Isaac Version",
+  "nodes": [
+    {
+      "name": "Receive User Question",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ],
+      "notes": "Step 1: Receive complex user query via webhook."
+    },
+    {
+      "name": "Split Question into Sub-Tasks",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        500,
+        300
+      ],
+      "notes": "Step 2: Break down user question intelligently."
+    },
+    {
+      "name": "Route to Specialized Domain Agent",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        750,
+        300
+      ],
+      "notes": "Step 3: Choose the right expert based on context."
+    },
+    {
+      "name": "Domain Expert LLM Response",
+      "type": "n8n-nodes-base.openai",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        300
+      ],
+      "notes": "Step 4: Generate sub-answers from specialists."
+    },
+    {
+      "name": "Supervisor Agent (Validate & Merge)",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        1250,
+        300
+      ],
+      "notes": "Step 5: Verify, validate, and merge sub-answers."
+    },
+    {
+      "name": "Final Answer Output",
+      "type": "n8n-nodes-base.httpResponse",
+      "typeVersion": 1,
+      "position": [
+        1500,
+        300
+      ],
+      "notes": "Step 6: Send back a polished final answer."
+    }
+  ],
+  "connections": {
+    "Receive User Question": {
+      "main": [
+        [
+          {
+            "node": "Split Question into Sub-Tasks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Question into Sub-Tasks": {
+      "main": [
+        [
+          {
+            "node": "Route to Specialized Domain Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route to Specialized Domain Agent": {
+      "main": [
+        [
+          {
+            "node": "Domain Expert LLM Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Domain Expert LLM Response": {
+      "main": [
+        [
+          {
+            "node": "Supervisor Agent (Validate & Merge)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supervisor Agent (Validate & Merge)": {
+      "main": [
+        [
+          {
+            "node": "Final Answer Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
