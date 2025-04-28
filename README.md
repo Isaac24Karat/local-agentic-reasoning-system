@@ -43,4 +43,13 @@ LARS demonstrates how AI systems can move beyond simple lookup responses — bui
 This is a blueprint for real-world, scalable AI deployment in enterprises where data privacy, modularity, and flexibility are critical.
 
 ---
+
+## Future Work
+
+- Build an offline fallback mode if local retrieval sources are temporarily unavailable
+- Integrate domain-specific fine-tuned local LLMs for highly technical queries
+- Develop self-evaluation mechanisms where agents validate their own sub-task outputs before Supervisor aggregation
+- Add usage logging and anonymized reporting for continuous system tuning without violating user privacy
+
+---
 *Demo built for AI Agent Implementation Manager portfolio presentation.*
