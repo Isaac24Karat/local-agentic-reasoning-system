@@ -48,7 +48,7 @@ This is a blueprint for real-world, scalable AI deployment in enterprises where 
 If the online document retrieval fails, the system activates a local fallback node that returns a cached response.  
 This ensures continuity of support even in offline or degraded environments.
 
-![Local Agentic RAG System Diagram](local-agentic-rag-system-diagram-v2.png)
+![Local Agentic RAG System Diagram](local-agentic-reasoning-diagram-v2.png)
 
 ---
 
