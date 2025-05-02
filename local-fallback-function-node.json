@@ -1,0 +1,13 @@
+{
+  "name": "Local Fallback Response",
+  "type": "n8n-nodes-base.function",
+  "typeVersion": 1,
+  "position": [
+    800,
+    400
+  ],
+  "parameters": {
+    "functionCode": "\nreturn [\n  {\n    json: {\n      title: \"Fallback: Refund Policy\",\n      content: \"If you cancel 24 hours before pickup, you\u2019ll receive a full refund. Otherwise, partial fees may apply.\",\n      source: \"local-fallback\"\n    }\n  }\n];\n"
+  },
+  "notes": "Returns local static fallback when online call fails"
+}
