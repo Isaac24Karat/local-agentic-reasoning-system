@@ -42,6 +42,14 @@
 LARS demonstrates how AI systems can move beyond simple lookup responses — building **local-first**, **secure**, **multi-agent reasoning systems** that adapt to complex real-world user queries.  
 This is a blueprint for real-world, scalable AI deployment in enterprises where data privacy, modularity, and flexibility are critical.
 
+
+## Offline Fallback
+
+If the online document retrieval fails, the system activates a local fallback node that returns a cached response.  
+This ensures continuity of support even in offline or degraded environments.
+
+![Local Agentic RAG System Diagram](local-agentic-rag-system-diagram-v2.png)
+
 ---
 
 ## Future Work
