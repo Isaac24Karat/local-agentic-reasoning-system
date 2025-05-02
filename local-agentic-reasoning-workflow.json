@@ -1,0 +1,156 @@
+{
+  "name": "Local Agentic Reasoning System",
+  "nodes": [
+    {
+      "name": "User Query (Webhook)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "name": "Online Retrieval (HTTP Request)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        500,
+        300
+      ]
+    },
+    {
+      "name": "Check Retrieval Success",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        750,
+        300
+      ]
+    },
+    {
+      "name": "Use Online Content",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        200
+      ]
+    },
+    {
+      "name": "Local Fallback Response",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        400
+      ],
+      "parameters": {
+        "functionCode": "\nreturn [\n  {\n    json: {\n      title: \"Fallback: Refund Policy\",\n      content: \"If you cancel 24 hours before pickup, you\u2019ll receive a full refund. Otherwise, partial fees may apply.\",\n      source: \"local-fallback\"\n    }\n  }\n];\n"
+      },
+      "notes": "Returns local static fallback when online call fails"
+    },
+    {
+      "name": "Merge Results",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 1,
+      "position": [
+        1250,
+        300
+      ],
+      "parameters": {
+        "mode": "passThrough"
+      },
+      "notes": "Combines online and fallback paths into one output"
+    },
+    {
+      "name": "Pass to Supervisor Agent",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1500,
+        300
+      ],
+      "notes": "Forwards merged data to next step"
+    }
+  ],
+  "connections": {
+    "User Query (Webhook)": {
+      "main": [
+        [
+          {
+            "node": "Online Retrieval (HTTP Request)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Online Retrieval (HTTP Request)": {
+      "main": [
+        [
+          {
+            "node": "Check Retrieval Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Retrieval Success": {
+      "main": [
+        [
+          {
+            "node": "Use Online Content",
+            "type": "main",
+            "index": 0,
+            "conditions": {
+              "true": []
+            }
+          }
+        ],
+        {
+          "node": "Local Fallback Response",
+          "type": "main",
+          "index": 0,
+          "conditions": {
+            "false": []
+          }
+        }
+      ]
+    },
+    "Use Online Content": {
+      "main": [
+        [
+          {
+            "node": "Merge Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Local Fallback Response": {
+      "main": [
+        [
+          {
+            "node": "Merge Results",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge Results": {
+      "main": [
+        [
+          {
+            "node": "Pass to Supervisor Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
