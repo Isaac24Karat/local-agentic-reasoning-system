@@ -1,5 +1,12 @@
 # Local Agentic Reasoning System (LARS)
 
+![Status](https://img.shields.io/badge/status-active-brightgreen)
+![Built With](https://img.shields.io/badge/built%20with-n8n%20%7C%20Offline%20Fallback%20%7C%20LangChain-blue)
+![AI Agents](https://img.shields.io/badge/agents-Local%20Retriever%20%7C%20Supervisor-purple)
+![License](https://img.shields.io/badge/license-MIT-lightgrey)
+![Last Update](https://img.shields.io/github/last-commit/Isaac24Karat/local-agentic-reasoning-system)
+
+
 > **Project Pitch:**  
 > I built a local-first, agentic RAG system that processes complex user queries by reasoning, researching, and validating across multiple specialized agents.  
 > Instead of simple retrieval, the system splits questions into sub-tasks, routes each sub-question to a domain expert, verifies the outputs with a Supervisor Agent, and synthesizes a complete, high-quality final answer.
