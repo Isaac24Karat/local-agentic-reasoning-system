@@ -26,6 +26,10 @@
 - Each agent retrieves and reasons about its specific topic
 - A Supervisor Agent validates, merges, and finalizes the structured answer
 - All data processing happens **locally** to protect privacy and improve speed
+🧠 Supports multi-turn reasoning
+📄 Handles structured and unstructured document input
+🔒 Local-first processing, no cloud required
+
 
 ---
 
